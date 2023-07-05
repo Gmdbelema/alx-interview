@@ -1,17 +1,19 @@
 #!/usr/bin/python3
-""" Defines lockboxes """
 
+def can_unlock_all(boxes):
+    num_boxes = len(boxes)  # Total number of boxes
+    unlocked_boxes = [False] * num_boxes  # Track the status of each box (locked/unlocked)
+    unlocked_boxes[0] = True  # The first box is initially unlocked
 
-def canUnlockAll(boxes):
-    """ Determines whether all boxes can be unlocked or not
-    Returns: True if all boxes can be unlocked  and
-             False if not
-             """
-    keys = [0]
+    # Start with the keys in the first box (box 0)
+    keys = boxes[0]
+
+    # Iterate over the keys and unlock the corresponding boxes
     for key in keys:
-        for val in boxes[key]:
-            if val not in keys:
-                keys.append(val)
-    if len(keys) == len(boxes):
-        return True
-    return False
+        if key < num_boxes and not unlocked_boxes[key]:
+            unlocked_boxes[key] = True
+            keys.extend(boxes[key])  # Add the keys from the newly opened box
+
+    # Check if all boxes have been unlocked
+    return all(unlocked_boxes)
+
