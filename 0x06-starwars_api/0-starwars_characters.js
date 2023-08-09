@@ -1,4 +1,4 @@
-#!/usr/bin/node
+#!/node/node12/bin/node
 const util = require('util');
 const request = util.promisify(require('request'));
 const filmID = process.argv[2];
